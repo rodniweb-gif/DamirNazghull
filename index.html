@@ -1,426 +1,76 @@
 <!DOCTYPE html>
-<html>
-<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Приглашение на свадьбу | Назгуль и Дамир</title>
 
-    <!-- Elegant fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome 6 icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
         :root {
             --beige-light: #f5efe6;
             --beige: #e8d9c8;
-            --beige-dark: #c8b6a6;
             --brown-light: #9b7b5b;
             --brown: #6b4e3a;
             --brown-dark: #3e2e24;
             --gold: #b99b6c;
             --cream: #fdfaf5;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-            overflow: hidden;
-            font-family: 'Montserrat', sans-serif;
-            background: #faf7f2;
-            color: #4a3b2f;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Золотые пылинки (canvas) */
-        #particlesCanvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 90;
-        }
-
-        /* ----- SCROLL SNAP CONTAINER ----- */
-        .scroll-container {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .section {
-            scroll-snap-align: start;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 2rem;
-            background-size: cover;
-            background-position: center;
-        }
-
-        /* ----- NAVIGATION DOTS ----- */
-        .nav-dots {
-            position: fixed;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-        .nav-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(185, 155, 108, 0.4);
-            border: 1px solid rgba(185, 155, 108, 0.6);
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        .nav-dot.active {
-            background: #b99b6c;
-            border-color: #b99b6c;
-            transform: scale(1.6);
-            box-shadow: 0 0 10px rgba(185, 155, 108, 0.8);
-        }
-
-        /* ===== HERO (SECTION 1) ===== */
-        .hero {
-            background: url('https://i.ibb.co/CcRJCXh/IMG-20260529-112049-557.jpg') center/cover no-repeat;
-            isolation: isolate;
-            text-align: center;
-            transition: background-position 0.1s ease-out;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, rgba(20, 12, 8, 0.35) 0%, rgba(35, 22, 15, 0.5) 100%);
-            z-index: 1;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 850px;
-            width: 100%;
-            animation: fadeInUp 1.8s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .hero-frame {
-            border: 2px solid rgba(232, 217, 200, 0.6);
-            padding: 3rem 2.5rem;
-            backdrop-filter: blur(6px);
-            background: rgba(245, 239, 230, 0.05);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-            border-radius: 2px;
-        }
-        .hero-date-top {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            letter-spacing: 6px;
-            color: #f0e4d0;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            font-weight: 400;
-            opacity: 0.95;
-        }
-        .hero-names {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(3rem, 10vw, 6rem);
-            font-weight: 500;
-            color: #ffffff;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 4px 15px rgba(0, 0, 0, 0.5);
-            letter-spacing: 2px;
-        }
-        .hero-ampersand {
-            font-style: italic;
-            font-weight: 400;
-            color: #e5d0a8;
-            display: block;
-            font-size: 2.6rem;
-            margin: 0.2rem 0;
-        }
-        .hero-subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-style: italic;
-            color: #f5ede0;
-            letter-spacing: 4px;
-            margin-top: 2.2rem;
-            font-weight: 400;
-        }
-
-        /* ===== SECTION 2: INVITE ===== */
-        .invite {
-            background-color: #fdfaf5;
-            background-image: radial-gradient(circle at 20% 30%, rgba(200, 170, 140, 0.06) 0%, transparent 45%);
-        }
-        .invite-card {
-            max-width: 700px;
-            text-align: center;
-            padding: 2rem;
-        }
-        .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.8rem;
-            font-weight: 500;
-            color: #3e2e24;
-            text-align: center;
-            margin-bottom: 2rem;
-            letter-spacing: 3px;
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 70px;
-            height: 2px;
-            background: #b99b6c;
-            margin: 0.9rem auto 0;
-            border-radius: 1px;
-        }
-        .invite-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem;
-            font-style: italic;
-            color: #4a3b2f;
-            line-height: 1.9;
-        }
-
-        /* ===== SECTION 3: DETAILS ===== */
-        .details {
-            background-color: #f5efe6;
-            background-image: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><path d="M30 5 L32 25 L48 15 L38 30 L58 32 L38 34 L48 45 L32 35 L30 55 L28 35 L12 45 L22 34 L2 32 L22 30 L12 15 L28 25 Z" fill="%23d9c5a0" opacity="0.03"/></svg>');
-        }
-        .details-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2.5rem;
-            margin-top: 2rem;
-            width: 100%;
-            max-width: 1000px;
-        }
-        .detail-card {
-            background: rgba(253, 250, 245, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(185, 155, 108, 0.3);
-            padding: 2.4rem 1.8rem;
-            flex: 1 1 200px;
-            max-width: 240px;
-            text-align: center;
-            box-shadow: 0 12px 30px rgba(60, 40, 30, 0.08);
-            border-radius: 2px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .detail-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 35px rgba(100, 70, 40, 0.12);
-        }
-        .detail-icon {
-            font-size: 2.5rem;
-            color: #b99b6c;
-            margin-bottom: 1.2rem;
-        }
-        .detail-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #6b4e3a;
-            margin-bottom: 1rem;
-        }
-        .detail-value {
-            font-weight: 300;
-            font-size: 0.95rem;
-            color: #4a3b2f;
-            line-height: 1.8;
-        }
-        .detail-value strong {
-            font-weight: 500;
-            display: block;
-            font-size: 1.15rem;
-            color: #3e2e24;
-            letter-spacing: 0.5px;
-        }
-
-        /* ===== SECTION 4: TIMERS ===== */
-        .timers {
-            background: #fdfaf5;
-            background-image: linear-gradient(0deg, rgba(180, 150, 120, 0.05) 1px, transparent 1px);
-            background-size: 100% 50px;
-        }
-        .timer-block {
-            margin-bottom: 3.5rem;
-            text-align: center;
-        }
-        .timer-label {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: #6b4e3a;
-            margin-bottom: 1.8rem;
-            letter-spacing: 2px;
-        }
-        .countdown {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-        }
-        .countdown-item {
-            text-align: center;
-            min-width: 85px;
-        }
-        .countdown-number {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.5rem;
-            font-weight: 500;
-            color: #3e2e24;
-            line-height: 1;
-            background: rgba(232, 217, 200, 0.4);
-            padding: 0.8rem 0.4rem;
-            border-radius: 2px;
-            display: inline-block;
-            border: 1px solid rgba(185, 155, 108, 0.5);
-            min-width: 95px;
-            backdrop-filter: blur(4px);
-            transition: transform 0.2s ease;
-        }
-        .countdown-label {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.7rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: #9b7b5b;
-            margin-top: 0.8rem;
-            font-weight: 400;
-        }
-        .rsvp-reminder {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1.2rem;
-            color: #6b4e3a;
-            margin-top: 0.8rem;
-        }
-
-        /* ===== SECTION 5: RSVP ===== */
-        .rsvp {
-            background-color: #f5efe6;
-            background-image: radial-gradient(circle at 70% 20%, rgba(185, 155, 108, 0.06) 0%, transparent 50%);
-        }
-        .rsvp-card {
-            background: rgba(253, 250, 245, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(185, 155, 108, 0.3);
-            padding: 3rem 2rem;
-            max-width: 500px;
-            margin: 0 auto;
-            text-align: center;
-            box-shadow: 0 12px 30px rgba(60, 40, 30, 0.08);
-            border-radius: 2px;
-        }
-        .rsvp-icon {
-            font-size: 2.8rem;
-            color: #b99b6c;
-            margin-bottom: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .rsvp-icon:active {
-            transform: scale(0.9);
-        }
-        .rsvp-deadline {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 500;
-            color: #6b4e3a;
-            letter-spacing: 2px;
-        }
-        .rsvp-date-highlight {
-            font-weight: 600;
-            font-size: 1.3rem;
-            color: #3e2e24;
-            letter-spacing: 2px;
-            display: block;
-            margin: 0.6rem 0 1.2rem;
-        }
-        .rsvp-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1.2rem;
-            color: #4a3b2f;
-            margin: 1.5rem 0;
-            line-height: 1.8;
-        }
-        .rsvp-contact {
-            font-weight: 300;
-            color: #6b4e3a;
-            margin-top: 1.5rem;
-        }
-        .rsvp-contact i {
-            color: #b99b6c;
-            margin: 0 5px;
-        }
-
-        .footer-note {
-            margin-top: 2rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            letter-spacing: 3px;
-            color: #6b4e3a;
-            text-align: center;
-        }
-
-        /* Анимации появления при скролле */
-        .fade-in-section {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .fade-in-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .hero-frame { padding: 2rem 1.2rem; }
-            .section-title { font-size: 2.2rem; }
-            .countdown-number { font-size: 2.5rem; min-width: 70px; padding: 0.6rem 0.2rem; }
-            .detail-card { max-width: 100%; flex: 1 1 100%; }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; overflow: hidden; font-family: 'Montserrat', sans-serif; background: #faf7f2; color: #4a3b2f; }
+        .scroll-container { height: 100vh; overflow-y: scroll; scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+        .section { scroll-snap-align: start; min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; padding: 2rem; background-size: cover; background-position: center; }
+        .nav-dots { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 100; display: flex; flex-direction: column; gap: 14px; }
+        .nav-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(185,155,108,0.4); border: 1px solid rgba(185,155,108,0.6); cursor: pointer; transition: 0.3s; }
+        .nav-dot.active { background: #b99b6c; border-color: #b99b6c; transform: scale(1.6); box-shadow: 0 0 10px rgba(185,155,108,0.8); }
+        .hero { background: url('https://i.ibb.co/CcRJCXh/IMG-20260529-112049-557.jpg') center/cover no-repeat; text-align: center; }
+        .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,12,8,0.35) 0%, rgba(35,22,15,0.5) 100%); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; max-width: 850px; width: 100%; animation: fadeInUp 1.8s cubic-bezier(0.23,1,0.32,1); }
+        .hero-frame { border: 2px solid rgba(232,217,200,0.6); padding: 3rem 2.5rem; backdrop-filter: blur(6px); background: rgba(245,239,230,0.05); box-shadow: 0 25px 60px rgba(0,0,0,0.25); border-radius: 2px; }
+        .hero-date-top { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; letter-spacing: 6px; color: #f0e4d0; text-transform: uppercase; margin-bottom: 2rem; opacity: 0.95; }
+        .hero-names { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 10vw, 6rem); font-weight: 500; color: #fff; line-height: 1.1; margin-bottom: 1.5rem; text-shadow: 2px 4px 15px rgba(0,0,0,0.5); letter-spacing: 2px; }
+        .hero-ampersand { font-style: italic; color: #e5d0a8; display: block; font-size: 2.6rem; margin: 0.2rem 0; }
+        .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-style: italic; color: #f5ede0; letter-spacing: 4px; margin-top: 2.2rem; }
+        .invite { background-color: #fdfaf5; }
+        .invite-card { max-width: 700px; text-align: center; padding: 2rem; }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 500; color: #3e2e24; text-align: center; margin-bottom: 2rem; letter-spacing: 3px; position: relative; }
+        .section-title::after { content: ''; display: block; width: 70px; height: 2px; background: #b99b6c; margin: 0.9rem auto 0; border-radius: 1px; }
+        .invite-text { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-style: italic; color: #4a3b2f; line-height: 1.9; }
+        .details { background-color: #f5efe6; }
+        .details-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem; margin-top: 2rem; width: 100%; max-width: 1000px; }
+        .detail-card { background: rgba(253,250,245,0.8); backdrop-filter: blur(10px); border: 1px solid rgba(185,155,108,0.3); padding: 2.4rem 1.8rem; flex: 1 1 200px; max-width: 240px; text-align: center; box-shadow: 0 12px 30px rgba(60,40,30,0.08); border-radius: 2px; transition: transform 0.3s; }
+        .detail-card:hover { transform: translateY(-6px); box-shadow: 0 20px 35px rgba(100,70,40,0.12); }
+        .detail-icon { font-size: 2.5rem; color: #b99b6c; margin-bottom: 1.2rem; }
+        .detail-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #6b4e3a; margin-bottom: 1rem; }
+        .detail-value { font-weight: 300; font-size: 0.95rem; color: #4a3b2f; line-height: 1.8; }
+        .detail-value strong { font-weight: 500; display: block; font-size: 1.15rem; color: #3e2e24; letter-spacing: 0.5px; }
+        .timers { background: #fdfaf5; }
+        .timer-block { margin-bottom: 3.5rem; text-align: center; }
+        .timer-label { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: #6b4e3a; margin-bottom: 1.8rem; letter-spacing: 2px; }
+        .countdown { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
+        .countdown-item { text-align: center; min-width: 85px; }
+        .countdown-number { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 500; color: #3e2e24; line-height: 1; background: rgba(232,217,200,0.4); padding: 0.8rem 0.4rem; border-radius: 2px; display: inline-block; border: 1px solid rgba(185,155,108,0.5); min-width: 95px; backdrop-filter: blur(4px); transition: transform 0.2s; }
+        .countdown-label { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: #9b7b5b; margin-top: 0.8rem; }
+        .rsvp-reminder { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: #6b4e3a; margin-top: 0.8rem; }
+        .rsvp { background-color: #f5efe6; }
+        .rsvp-card { background: rgba(253,250,245,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(185,155,108,0.3); padding: 3rem 2rem; max-width: 500px; margin: 0 auto; text-align: center; box-shadow: 0 12px 30px rgba(60,40,30,0.08); border-radius: 2px; }
+        .rsvp-icon { font-size: 2.8rem; color: #b99b6c; margin-bottom: 1.5rem; }
+        .rsvp-deadline { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 500; color: #6b4e3a; letter-spacing: 2px; }
+        .rsvp-date-highlight { font-weight: 600; font-size: 1.3rem; color: #3e2e24; letter-spacing: 2px; display: block; margin: 0.6rem 0 1.2rem; }
+        .rsvp-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: #4a3b2f; margin: 1.5rem 0; line-height: 1.8; }
+        .rsvp-contact { font-weight: 300; color: #6b4e3a; margin-top: 1.5rem; font-size: 1.1rem; }
+        .rsvp-contact i { color: #b99b6c; margin-right: 5px; }
+        .footer-note { margin-top: 2rem; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 3px; color: #6b4e3a; text-align: center; }
+        @media (max-width: 768px) { .hero-frame { padding: 2rem 1.2rem; } .section-title { font-size: 2.2rem; } .countdown-number { font-size: 2.5rem; min-width: 70px; } .detail-card { max-width: 100%; flex: 1 1 100%; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-
-    <!-- Canvas для золотых пылинок -->
-    <canvas id="particlesCanvas"></canvas>
-
-    <!-- Navigation dots -->
     <div class="nav-dots" id="navDots">
         <div class="nav-dot active" data-index="0"></div>
         <div class="nav-dot" data-index="1"></div>
@@ -428,399 +78,117 @@
         <div class="nav-dot" data-index="3"></div>
         <div class="nav-dot" data-index="4"></div>
     </div>
-
-    <!-- Scroll container -->
     <div class="scroll-container" id="scrollContainer">
-
-        <!-- SECTION 1: HERO -->
         <div class="section hero" id="section0">
             <div class="hero-content">
                 <div class="hero-frame">
                     <p class="hero-date-top">1 августа 2026</p>
-                    <h1 class="hero-names">
-                        Назгуль
-                        <span class="hero-ampersand">&amp;</span>
-                        Дамир
-                    </h1>
+                    <h1 class="hero-names">Назгуль <span class="hero-ampersand">&amp;</span> Дамир</h1>
                     <p class="hero-subtitle">Мы приглашаем вас на нашу свадьбу</p>
                 </div>
             </div>
         </div>
-
-        <!-- SECTION 2: INVITE -->
-        <div class="section invite fade-in-section" id="section1">
+        <div class="section invite" id="section1">
             <div class="invite-card">
                 <h2 class="section-title">Дорогие гости</h2>
-                <p class="invite-text">
-                    С радостью и трепетом в сердце мы приглашаем вас разделить с нами
-                    самый важный день нашей жизни. Ваше присутствие станет для нас
-                    бесценным подарком и благословением на долгую и счастливую
-                    семейную жизнь.
-                </p>
+                <p class="invite-text">С радостью и трепетом в сердце мы приглашаем вас разделить с нами самый важный день нашей жизни. Ваше присутствие станет для нас бесценным подарком и благословением на долгую и счастливую семейную жизнь.</p>
             </div>
         </div>
-
-        <!-- SECTION 3: DETAILS -->
-        <div class="section details fade-in-section" id="section2">
+        <div class="section details" id="section2">
             <div style="width:100%; max-width:1000px;">
                 <h2 class="section-title">Детали торжества</h2>
                 <div class="details-grid">
-                    <div class="detail-card">
-                        <div class="detail-icon"><i class="far fa-calendar-check"></i></div>
-                        <div class="detail-title">Дата</div>
-                        <div class="detail-value">
-                            <strong>1 августа 2026</strong>
-                            Суббота
-                        </div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-icon"><i class="far fa-clock"></i></div>
-                        <div class="detail-title">Время</div>
-                        <div class="detail-value">
-                            <strong>Сбор гостей в 17:00</strong>
-                            Начало торжества
-                        </div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="detail-title">Место</div>
-                        <div class="detail-value">
-                            <strong>Банкетный зал «Бахетле»</strong>
-                            г. Астрахань, с. Растопуловка
-                        </div>
-                    </div>
-                    <div class="detail-card">
-                        <div class="detail-icon"><i class="fas fa-vest"></i></div>
-                        <div class="detail-title">Дресс-код</div>
-                        <div class="detail-value">
-                            <strong>Элегантный вечерний стиль</strong>
-                            Мы будем рады, если вы поддержите цветовую гамму: бежевый, коричневый, золотой
-                        </div>
-                    </div>
+                    <div class="detail-card"><div class="detail-icon"><i class="far fa-calendar-check"></i></div><div class="detail-title">Дата</div><div class="detail-value"><strong>1 августа 2026</strong>Суббота</div></div>
+                    <div class="detail-card"><div class="detail-icon"><i class="far fa-clock"></i></div><div class="detail-title">Время</div><div class="detail-value"><strong>Сбор гостей в 17:00</strong>Начало торжества</div></div>
+                    <div class="detail-card"><div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div><div class="detail-title">Место</div><div class="detail-value"><strong>Банкетный зал «Бахетле»</strong>г. Астрахань, с. Растопуловка</div></div>
+                    <div class="detail-card"><div class="detail-icon"><i class="fas fa-vest"></i></div><div class="detail-title">Дресс-код</div><div class="detail-value"><strong>Пастельные тона</strong>Приветствуются нежно-розовый, лавандовый, мятный, сливочный, светло-серый. Пожалуйста, избегайте чёрного, красного и золотого.</div></div>
                 </div>
             </div>
         </div>
-
-        <!-- SECTION 4: TIMERS -->
-        <div class="section timers fade-in-section" id="section3">
+        <div class="section timers" id="section3">
             <div style="width:100%; max-width:800px;">
                 <h2 class="section-title">Обратный отсчёт</h2>
-
                 <div class="timer-block">
-                    <p class="timer-label">
-                        <i class="far fa-envelope" style="color:#b99b6c; margin-right:8px;"></i>
-                        До дедлайна ответа гостей
-                    </p>
+                    <p class="timer-label"><i class="far fa-envelope" style="color:#b99b6c; margin-right:8px;"></i>До дедлайна ответа гостей</p>
                     <div class="countdown" id="countdown-rsvp">
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="rsvp-days">00</span>
-                            <span class="countdown-label">Дней</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="rsvp-hours">00</span>
-                            <span class="countdown-label">Часов</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="rsvp-minutes">00</span>
-                            <span class="countdown-label">Минут</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="rsvp-seconds">00</span>
-                            <span class="countdown-label">Секунд</span>
-                        </div>
+                        <div class="countdown-item"><span class="countdown-number" id="rsvp-days">00</span><span class="countdown-label">Дней</span></div>
+                        <div class="countdown-item"><span class="countdown-number" id="rsvp-hours">00</span><span class="countdown-label">Часов</span></div>
+                        <div class="countdown-item"><span class="countdown-number" id="rsvp-minutes">00</span><span class="countdown-label">Минут</span></div>
+                        <div class="countdown-item"><span class="countdown-number" id="rsvp-seconds">00</span><span class="countdown-label">Секунд</span></div>
                     </div>
-                    <p class="rsvp-reminder">
-                        Пожалуйста, подтвердите участие до <strong>10 июля 2026</strong>
-                    </p>
+                    <p class="rsvp-reminder">Пожалуйста, подтвердите участие до <strong>10 июля 2026</strong></p>
                 </div>
-
                 <div style="width:60px; height:1px; background:#c8b6a6; margin:2rem auto; opacity:0.5;"></div>
-
                 <div class="timer-block">
-                    <p class="timer-label">
-                        <i class="fas fa-heart" style="color:#b99b6c; margin-right:8px;"></i>
-                        До дня свадьбы
-                    </p>
+                    <p class="timer-label"><i class="fas fa-heart" style="color:#b99b6c; margin-right:8px;"></i>До дня свадьбы</p>
                     <div class="countdown" id="countdown-wedding">
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="wedding-days">00</span>
-                            <span class="countdown-label">Дней</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="wedding-hours">00</span>
-                            <span class="countdown-label">Часов</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="wedding-minutes">00</span>
-                            <span class="countdown-label">Минут</span>
-                        </div>
-                        <div class="countdown-item">
-                            <span class="countdown-number" id="wedding-seconds">00</span>
-                            <span class="countdown-label">Секунд</span>
-                        </div>
+                        <div class="countdown-item"><span class="countdown-number" id="wedding-days">00</span><span class="countdown-label">Дней</span></div>
+                        <div class="countdown-item"><span class="countdown-number" id="wedding-hours">00</span><span class="countdown-label">Часов</span></div>
+                        <div class="countdown-item"><span class="countdown-number" id="wedding-minutes">00</span><span class="countdown-label">Минут</span></div>
+                        <div class="countdown-item"><span class="countdown-number" id="wedding-seconds">00</span><span class="countdown-label">Секунд</span></div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- SECTION 5: RSVP -->
-         <!-- SECTION 5: RSVP -->
-        <div class="section rsvp fade-in-section" id="section4">
+        <div class="section rsvp" id="section4">
             <div style="width:100%; max-width:600px;">
                 <h2 class="section-title">Подтверждение</h2>
                 <div class="rsvp-card">
-                    <div class="rsvp-icon" id="sparkIcon">
-                        <i class="far fa-paper-plane"></i>
-                    </div>
+                    <div class="rsvp-icon"><i class="far fa-paper-plane"></i></div>
                     <p class="rsvp-deadline">Финальный ответ</p>
                     <span class="rsvp-date-highlight">до 10 июля 2026</span>
-                    <p class="rsvp-text">
-                        Мы будем искренне благодарны, если вы сообщите нам
-                        о своём решении заранее. Это поможет нам сделать
-                        праздник уютным и продуманным для каждого.
-                    </p>
+                    <p class="rsvp-text">Мы будем искренне благодарны, если вы сообщите нам о своём решении заранее. Это поможет нам сделать праздник уютным и продуманным для каждого.</p>
                     <div class="rsvp-contact">
-                        <i class="fas fa-phone-alt"></i> +7 (XXX) XXX-XX-XX &nbsp;|&nbsp;
-                        <i class="fab fa-whatsapp"></i> WhatsApp
+                        <i class="fas fa-phone-alt"></i> 8 927 552 44 61
                     </div>
                 </div>
-                <div class="footer-note">
-                    <i class="fas fa-infinity" style="color:#b99b6c; margin:0 8px;"></i>
-                    Назгуль &amp; Дамир
-                    <i class="fas fa-infinity" style="color:#b99b6c; margin:0 8px;"></i>
-                </div>
+                <div class="footer-note"><i class="fas fa-infinity" style="color:#b99b6c; margin:0 8px;"></i> Назгуль &amp; Дамир <i class="fas fa-infinity" style="color:#b99b6c; margin:0 8px;"></i></div>
             </div>
         </div>
     </div>
-
     <script>
         (function() {
-            // ========== 1. ЗОЛОТЫЕ ПЫЛИНКИ (canvas) ==========
-            const canvas = document.getElementById('particlesCanvas');
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            class Particle {
-                constructor() {
-                    this.reset();
-                }
-                reset() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2 + 0.5;
-                    this.speedX = (Math.random() - 0.5) * 0.4;
-                    this.speedY = (Math.random() - 0.5) * 0.4 - 0.2;
-                    this.opacity = Math.random() * 0.5 + 0.2;
-                }
-                update() {
-                    this.x += this.speedX;
-                    this.y += this.speedY;
-                    if (this.x < 0 || this.x > canvas.width ||
-                        this.y < 0 || this.y > canvas.height) {
-                        this.reset();
-                    }
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(185, 155, 108, ${this.opacity})`;
-                    ctx.fill();
-                }
-            }
-
-            function initParticles(count = 60) {
-                particles = [];
-                for (let i = 0; i < count; i++) {
-                    particles.push(new Particle());
-                }
-            }
-            initParticles();
-
-            function animateParticles() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
-                });
-                requestAnimationFrame(animateParticles);
-            }
-            animateParticles();
-
-            // ========== 2. ПАРАЛЛАКС ФОНА HERO ==========
-            const heroSection = document.querySelector('.hero');
-            if (heroSection) {
-                heroSection.addEventListener('mousemove', (e) => {
-                    const rect = heroSection.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const moveX = (x / rect.width - 0.5) * 20;  // смещение до 10px
-                    const moveY = (y / rect.height - 0.5) * 20;
-                    heroSection.style.backgroundPosition = `calc(50% + ${moveX}px) calc(50% + ${moveY}px)`;
-                });
-                heroSection.addEventListener('mouseleave', () => {
-                    heroSection.style.backgroundPosition = 'center';
-                });
-            }
-
-            // ========== 3. АНИМАЦИЯ ПОЯВЛЕНИЯ СЕКЦИЙ (IntersectionObserver) ==========
-            const fadeSections = document.querySelectorAll('.fade-in-section');
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.3 });
-
-            fadeSections.forEach(section => sectionObserver.observe(section));
-
-            // ========== 4. ТОЧКИ НАВИГАЦИИ ==========
             const scrollContainer = document.getElementById('scrollContainer');
-            const sectionsAll = document.querySelectorAll('.section');
+            const sections = document.querySelectorAll('.section');
             const dots = document.querySelectorAll('.nav-dot');
-
-            const dotObserver = new IntersectionObserver((entries) => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        const index = Array.from(sectionsAll).indexOf(entry.target);
-                        if (index !== -1) {
-                            dots.forEach((dot, idx) => {
-                                dot.classList.toggle('active', idx === index);
-                            });
-                        }
+                        const index = Array.from(sections).indexOf(entry.target);
+                        if (index !== -1) dots.forEach((dot, idx) => dot.classList.toggle('active', idx === index));
                     }
                 });
-            }, {
-                root: scrollContainer,
-                threshold: 0.6
-            });
-
-            sectionsAll.forEach(section => dotObserver.observe(section));
-
-            dots.forEach(dot => {
-                dot.addEventListener('click', function() {
-                    const index = parseInt(this.dataset.index);
-                    if (!isNaN(index) && sectionsAll[index]) {
-                        sectionsAll[index].scrollIntoView({ behavior: 'smooth' });
-                    }
-                });
-            });
-
-            // ========== 5. ТАЙМЕРЫ С АНИМАЦИЕЙ ==========
-            const prevValues = {
-                rsvp: { days: '', hours: '', minutes: '', seconds: '' },
-                wedding: { days: '', hours: '', minutes: '', seconds: '' }
-            };
-
-            function animateNumber(element, newValue) {
-                if (element.textContent !== newValue) {
-                    element.style.transform = 'scale(1.2)';
-                    element.textContent = newValue;
-                    setTimeout(() => {
-                        element.style.transform = 'scale(1)';
-                    }, 200);
-                } else {
-                    element.textContent = newValue;
-                }
-            }
-
+            }, { root: scrollContainer, threshold: 0.6 });
+            sections.forEach(section => observer.observe(section));
+            dots.forEach(dot => dot.addEventListener('click', function() {
+                const index = parseInt(this.dataset.index);
+                if (!isNaN(index) && sections[index]) sections[index].scrollIntoView({ behavior: 'smooth' });
+            }));
             function updateCountdowns() {
                 const now = new Date().getTime();
                 const rsvpDeadline = new Date(2026, 6, 10, 23, 59, 59).getTime();
                 const weddingDate = new Date(2026, 7, 1, 17, 0, 0).getTime();
-
-                function processTimer(prefix, diff, prev) {
+                function setTimerValues(prefix, diff) {
                     const daysEl = document.getElementById(prefix + '-days');
                     const hoursEl = document.getElementById(prefix + '-hours');
                     const minutesEl = document.getElementById(prefix + '-minutes');
                     const secondsEl = document.getElementById(prefix + '-seconds');
                     if (!daysEl || !hoursEl || !minutesEl || !secondsEl) return;
-
-                    let days, hours, minutes, seconds;
                     if (diff > 0) {
-                        days = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
-                        hours = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-                        minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-                        seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+                        daysEl.textContent = String(Math.floor(diff / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                        hoursEl.textContent = String(Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                        minutesEl.textContent = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                        secondsEl.textContent = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
                     } else {
-                        days = hours = minutes = seconds = '00';
+                        daysEl.textContent = hoursEl.textContent = minutesEl.textContent = secondsEl.textContent = '00';
                     }
-
-                    animateNumber(daysEl, days);
-                    animateNumber(hoursEl, hours);
-                    animateNumber(minutesEl, minutes);
-                    animateNumber(secondsEl, seconds);
                 }
-
-                processTimer('rsvp', rsvpDeadline - now, prevValues.rsvp);
-                processTimer('wedding', weddingDate - now, prevValues.wedding);
+                setTimerValues('rsvp', rsvpDeadline - now);
+                setTimerValues('wedding', weddingDate - now);
             }
-
             updateCountdowns();
             setInterval(updateCountdowns, 1000);
-
-            // ========== 6. ИСКРЫ ПРИ КЛИКЕ НА ИКОНКУ ОТПРАВКИ ==========
-            const sparkIcon = document.getElementById('sparkIcon');
-            if (sparkIcon) {
-                sparkIcon.addEventListener('click', function(e) {
-                    // Создаём временные золотые частицы вокруг иконки
-                    const rect = sparkIcon.getBoundingClientRect();
-                    const cx = rect.left + rect.width / 2;
-                    const cy = rect.top + rect.height / 2;
-                    const count = 12;
-
-                    for (let i = 0; i < count; i++) {
-                        const spark = document.createElement('div');
-                        spark.style.position = 'fixed';
-                        spark.style.left = cx + 'px';
-                        spark.style.top = cy + 'px';
-                        spark.style.width = '4px';
-                        spark.style.height = '4px';
-                        spark.style.background = '#b99b6c';
-                        spark.style.borderRadius = '50%';
-                        spark.style.pointerEvents = 'none';
-                        spark.style.zIndex = '200';
-                        spark.style.transition = 'all 0.8s ease-out';
-                        document.body.appendChild(spark);
-
-                        const angle = (i / count) * Math.PI * 2;
-                        const distance = 40 + Math.random() * 30;
-                        const dx = Math.cos(angle) * distance;
-                        const dy = Math.sin(angle) * distance;
-
-                        requestAnimationFrame(() => {
-                            spark.style.transform = `translate(${dx}px, ${dy}px)`;
-                            spark.style.opacity = '0';
-                            spark.style.width = '2px';
-                            spark.style.height = '2px';
-                        });
-
-                        setTimeout(() => {
-                            spark.remove();
-                        }, 800);
-                    }
-                });
-            }
-
         })();
     </script>
 </body>
-</html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
-</head>
-
-<body>
-  
-</body>
-
 </html>
