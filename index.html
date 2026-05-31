@@ -49,6 +49,12 @@
         .detail-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #6b4e3a; margin-bottom: 1rem; }
         .detail-value { font-weight: 300; font-size: 0.95rem; color: #4a3b2f; line-height: 1.8; }
         .detail-value strong { font-weight: 500; display: block; font-size: 1.15rem; color: #3e2e24; letter-spacing: 0.5px; }
+        .dress-code-card { flex: 1 1 320px; max-width: 400px; }
+        .color-palette { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; margin: 1.2rem 0 1.5rem; }
+        .swatch { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        .swatch-label { font-size: 0.65rem; letter-spacing: 0.5px; color: #6b4e3a; margin-top: 0.2rem; }
+        .swatch-wrapper { display: flex; flex-direction: column; align-items: center; width: 50px; }
+        .dress-code-note { font-style: italic; margin-top: 0.5rem; color: #9b7b5b; font-size: 0.85rem; }
         .timers { background: #fdfaf5; }
         .timer-block { margin-bottom: 3.5rem; text-align: center; }
         .timer-label { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-style: italic; color: #6b4e3a; margin-bottom: 1.8rem; letter-spacing: 2px; }
@@ -66,7 +72,7 @@
         .rsvp-contact { font-weight: 300; color: #6b4e3a; margin-top: 1.5rem; font-size: 1.1rem; }
         .rsvp-contact i { color: #b99b6c; margin-right: 5px; }
         .footer-note { margin-top: 2rem; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; letter-spacing: 3px; color: #6b4e3a; text-align: center; }
-        @media (max-width: 768px) { .hero-frame { padding: 2rem 1.2rem; } .section-title { font-size: 2.2rem; } .countdown-number { font-size: 2.5rem; min-width: 70px; } .detail-card { max-width: 100%; flex: 1 1 100%; } }
+        @media (max-width: 768px) { .hero-frame { padding: 2rem 1.2rem; } .section-title { font-size: 2.2rem; } .countdown-number { font-size: 2.5rem; min-width: 70px; } .detail-card { max-width: 100%; flex: 1 1 100%; } .dress-code-card { max-width: 100%; } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -99,9 +105,21 @@
                 <h2 class="section-title">Детали торжества</h2>
                 <div class="details-grid">
                     <div class="detail-card"><div class="detail-icon"><i class="far fa-calendar-check"></i></div><div class="detail-title">Дата</div><div class="detail-value"><strong>1 августа 2026</strong>Суббота</div></div>
-                    <div class="detail-card"><div class="detail-icon"><i class="far fa-clock"></i></div><div class="detail-title">Время</div><div class="detail-value"><strong>Сбор гостей в 17:00</strong>Начало торжества</div></div>
+                    <div class="detail-card"><div class="detail-icon"><i class="far fa-clock"></i></div><div class="detail-title">Время</div><div class="detail-value"><strong>Сбор гостей в 16:00</strong>Начало торжества в 17:00</div></div>
                     <div class="detail-card"><div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div><div class="detail-title">Место</div><div class="detail-value"><strong>Банкетный зал «Бахетле»</strong>г. Астрахань, с. Растопуловка</div></div>
-                    <div class="detail-card"><div class="detail-icon"><i class="fas fa-vest"></i></div><div class="detail-title">Дресс-код</div><div class="detail-value"><strong>Пастельные тона</strong>Приветствуются нежно-розовый, лавандовый, мятный, сливочный, светло-серый. Пожалуйста, избегайте чёрного, красного и золотого.</div></div>
+                    <div class="detail-card dress-code-card">
+                        <div class="detail-icon"><i class="fas fa-vest"></i></div>
+                        <div class="detail-title">Дресс-код</div>
+                        <div class="detail-value" style="margin-bottom:0.2rem;"><strong>Пастельная гармония</strong></div>
+                        <div class="color-palette">
+                            <div class="swatch-wrapper"><div class="swatch" style="background:#f2a68d;" title="16-1511 TCX"></div><span class="swatch-label">16-1511 TCX</span></div>
+                            <div class="swatch-wrapper"><div class="swatch" style="background:#fdf38a;" title="#FDF38A"></div><span class="swatch-label">#FDF38A</span></div>
+                            <div class="swatch-wrapper"><div class="swatch" style="background:#4f2c1d;" title="#4F2C1D"></div><span class="swatch-label">#4F2C1D</span></div>
+                            <div class="swatch-wrapper"><div class="swatch" style="background:#4f7942;" title="18-0130 TCX"></div><span class="swatch-label">18-0130 TCX</span></div>
+                            <div class="swatch-wrapper"><div class="swatch" style="background:#7bc4c0;" title="12-4611 TCX"></div><span class="swatch-label">12-4611 TCX</span></div>
+                        </div>
+                        <p class="dress-code-note">Пожалуйста, никакого красного и чёрного. Только нежные природные оттенки.</p>
+                    </div>
                 </div>
             </div>
         </div>
