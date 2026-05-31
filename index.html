@@ -49,11 +49,11 @@
         .detail-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: #6b4e3a; margin-bottom: 1rem; }
         .detail-value { font-weight: 300; font-size: 0.95rem; color: #4a3b2f; line-height: 1.8; }
         .detail-value strong { font-weight: 500; display: block; font-size: 1.15rem; color: #3e2e24; letter-spacing: 0.5px; }
-        .dress-code-card { flex: 1 1 320px; max-width: 400px; }
-        .color-palette { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem; margin: 1.2rem 0 1.5rem; }
+        .dress-code-card { flex: 1 1 380px; max-width: 460px; }
+        .color-palette { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.9rem; margin: 1.2rem 0 1.5rem; }
         .swatch { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
         .swatch-label { font-size: 0.65rem; letter-spacing: 0.5px; color: #6b4e3a; margin-top: 0.2rem; }
-        .swatch-wrapper { display: flex; flex-direction: column; align-items: center; width: 50px; }
+        .swatch-wrapper { display: flex; flex-direction: column; align-items: center; width: 55px; }
         .dress-code-note { font-style: italic; margin-top: 0.5rem; color: #9b7b5b; font-size: 0.85rem; }
         .timers { background: #fdfaf5; }
         .timer-block { margin-bottom: 3.5rem; text-align: center; }
@@ -105,18 +105,19 @@
                 <h2 class="section-title">Детали торжества</h2>
                 <div class="details-grid">
                     <div class="detail-card"><div class="detail-icon"><i class="far fa-calendar-check"></i></div><div class="detail-title">Дата</div><div class="detail-value"><strong>1 августа 2026</strong>Суббота</div></div>
-                    <div class="detail-card"><div class="detail-icon"><i class="far fa-clock"></i></div><div class="detail-title">Время</div><div class="detail-value"><strong>Сбор гостей в 16:00</strong>Начало торжества в 17:00</div></div>
+                    <div class="detail-card"><div class="detail-icon"><i class="far fa-clock"></i></div><div class="detail-title">Время</div><div class="detail-value"><strong>Начало торжества в 16:00</strong></div></div>
                     <div class="detail-card"><div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div><div class="detail-title">Место</div><div class="detail-value"><strong>Банкетный зал «Бахетле»</strong>г. Астрахань, с. Растопуловка</div></div>
                     <div class="detail-card dress-code-card">
                         <div class="detail-icon"><i class="fas fa-vest"></i></div>
                         <div class="detail-title">Дресс-код</div>
                         <div class="detail-value" style="margin-bottom:0.2rem;"><strong>Пастельная гармония</strong></div>
                         <div class="color-palette">
-                            <div class="swatch-wrapper"><div class="swatch" style="background:#f2a68d;" title="16-1511 TCX"></div><span class="swatch-label">16-1511 TCX</span></div>
+                            <div class="swatch-wrapper"><div class="swatch" style="background:#E2A6BA;" title="#E2A6BA"></div><span class="swatch-label">#E2A6BA</span></div>
                             <div class="swatch-wrapper"><div class="swatch" style="background:#fdf38a;" title="#FDF38A"></div><span class="swatch-label">#FDF38A</span></div>
                             <div class="swatch-wrapper"><div class="swatch" style="background:#4f2c1d;" title="#4F2C1D"></div><span class="swatch-label">#4F2C1D</span></div>
                             <div class="swatch-wrapper"><div class="swatch" style="background:#4f7942;" title="18-0130 TCX"></div><span class="swatch-label">18-0130 TCX</span></div>
-                            <div class="swatch-wrapper"><div class="swatch" style="background:#7bc4c0;" title="12-4611 TCX"></div><span class="swatch-label">12-4611 TCX</span></div>
+                            <div class="swatch-wrapper"><div class="swatch" style="background:#CFE3F1;" title="#CFE3F1"></div><span class="swatch-label">#CFE3F1</span></div>
+                            <div class="swatch-wrapper"><div class="swatch" style="background:#8FB6D8;" title="#8FB6D8"></div><span class="swatch-label">#8FB6D8</span></div>
                         </div>
                         <p class="dress-code-note">Пожалуйста, никакого красного и чёрного. Только нежные природные оттенки.</p>
                     </div>
@@ -185,7 +186,7 @@
             function updateCountdowns() {
                 const now = new Date().getTime();
                 const rsvpDeadline = new Date(2026, 6, 10, 23, 59, 59).getTime();
-                const weddingDate = new Date(2026, 7, 1, 17, 0, 0).getTime();
+                const weddingDate = new Date(2026, 7, 1, 16, 0, 0).getTime();
                 function setTimerValues(prefix, diff) {
                     const daysEl = document.getElementById(prefix + '-days');
                     const hoursEl = document.getElementById(prefix + '-hours');
@@ -209,4 +210,4 @@
         })();
     </script>
 </body>
-</html>
+    </html>
